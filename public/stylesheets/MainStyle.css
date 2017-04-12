@@ -1,0 +1,48 @@
+
+md-toolbar {
+  min-height: 55px;
+}
+
+.md-toolbar-tools-bottom {
+  font-size: small;
+  & :last-child {
+    opacity: 0.8;
+  }
+}
+md-toolbar:not(.md-hue-1),
+.md-fab {
+  fill: #fff;
+}
+
+.user-avatar {
+  border-radius: 99%;
+}
+
+md-item-content[md-ink-ripple] {
+  position: relative;
+}
+
+.md-button {
+  color : currentColor;
+}
+
+md-sidenav {
+  max-width: 200px;
+}
+
+.img-circle {
+    border-radius: 50%;
+    max-width: 64px;
+}
+
+table {
+  background-color: white;
+}
+
+.material-icons.md-18 { font-size: 18px; height: 18px; width: 18px; }
+.material-icons.md-24 { font-size: 24px; height: 24px; width: 24px; }
+.material-icons.md-36 { font-size: 36px; height: 36px; width: 36px; }
+.material-icons.md-48 { font-size: 48px; height: 48px; width: 48px; }
+
+md-card-title.NoTopPad{padding-top: 0px;}
+md-card-title.NoBottomPad{padding-bottom: 0px;}

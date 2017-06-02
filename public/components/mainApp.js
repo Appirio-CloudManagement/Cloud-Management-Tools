@@ -14,7 +14,7 @@ app.constant('OuathRedirectURL', (function() {
       url: "/CEM-Dashboard",
       views: {
         'body': {
-          templateUrl: '../components/htmlTemplates/MainPages/CEM-Dashboard.html',
+          templateUrl: '../components/htmlTemplates/mainPages/CEM-Dashboard.html',
           controller: 'CEM-Dashboard-Ctrl'
         },
         'topToolbar': {
@@ -32,7 +32,7 @@ app.constant('OuathRedirectURL', (function() {
       url: "/CloudMgmt-Assignments",
       views: {
         'body': {
-          templateUrl: '/htmlTemplates/MainPages/CloudMgmtAssignments.html',
+          templateUrl: '/htmlTemplates/mainPages/CloudMgmtAssignments.html',
           controller: 'AssignmentView-Ctrl'
         }
       },

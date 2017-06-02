@@ -2,6 +2,7 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 
 	console.log('Ouath-RedirectURL');
 	console.log(OuathRedirectURL);
+	$scope.OuathRedirectURL = OuathRedirectURL;
 
 	$scope.getUserDetails = function(conn, UserId)
 	{

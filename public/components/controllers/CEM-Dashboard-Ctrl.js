@@ -1,8 +1,26 @@
 
-app.controller('CasesMilestones-Ctrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$mdToast', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $mdToast){
+app.controller('CEM-Dashboard-Ctrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$mdToast', '$localStorage', '$authService', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $mdToast, $localStorage, $authService){
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();
   };
+    $scope.UserId = $authService.ViewAsUser.Id;
+    $scope.UserContactId = $authService.ViewAsUser.ContactId;
+    $scope.conn = $authService.conn;
+    var PracticeName = 'Cloud Management - SFDC';
+    var PracticeFilter = " and pse__Practice__r.Name like '"+PracticeName+"'";
+
+    $scope.AccountQuery =  " SELECT Id, Name, "+  
+             " (SELECT Id, OwnerId, Owner.Name, Owner.Email, Priority, Account.Name, Account.Id, CaseNumber, Subject, CreatedDate, Thread_ID__c, Status,Status_Notes_Next_Steps__c, Cloud_Management_Lead__r.Full_Name__c, Contact.Name, Contact.Id, Contact.Email, Additional_Emails_for_Notifications__c, SLA_Met__c FROM cases Where (Cloud_Management_Lead__c = '"+$scope.UserContactId+"' OR Cloud_Management_Lead__c = '' ) and IsClosed = false order by Priority,CreatedDate)," + 
+             " (SELECT PSE__Project_ID__c FROM pse__Projects__r WHERE IsClosed__c = \'No\'"+PracticeFilter+")" +
+             " FROM Account " +
+             " <<WhereClause>> " +
+             " ORDER BY Name";
+
+    $scope.AccountQuery = $scope.AccountQuery.replace("<<WhereClause>>", " WHERE Id in (SELECT pse__Account__c FROM pse__Proj__c where (NOT Name like '%DBLCLK%') and pse__Is_Active__c = true AND pse__Project_Manager__c = '"+$scope.UserContactId+"') ");
+
+    $scope.UserId = $authService.ViewAsUser.Id;
+    $scope.conn = $authService.conn;
+
 
         $scope.waitingCustomerAction = [
             {
@@ -72,7 +90,6 @@ app.controller('CasesMilestones-Ctrl', ['$scope', '$mdBottomSheet','$mdSidenav',
             
         ];
 
-        console.log($scope.nutritionList);
 
   $scope.showListBottomSheet = function($event) {
     $scope.alert = '';
@@ -97,6 +114,13 @@ app.controller('CasesMilestones-Ctrl', ['$scope', '$mdBottomSheet','$mdSidenav',
       $scope.alert = 'You cancelled the dialog.';
     });
   };
+
+
+  $scope.conn.query($scope.AccountQuery).then(function(res){
+    console.log('ACCOUNT QUERY WORKED!!!');
+    console.log($scope.AccountQuery);
+    console.log(res);
+  });
 
 
 }]);

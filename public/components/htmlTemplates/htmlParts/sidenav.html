@@ -1,0 +1,41 @@
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" style="height:100%;">
+  <md-toolbar class="md-tall md-hue-2">
+    <span flex></span>
+    <div layout="column" class="md-toolbar-tools-bottom inset">
+      
+      <user-avatar></user-avatar>
+      <!--<img src="{{SmallPhotoUrl}}" style="border-radius: 75px;max-height: 75px;max-width: 75px;" >-->
+      <span></span>
+</br>
+      <div>{{UserName}}</div>
+      <div>{{UserEmail}}</div>
+    </div>
+  </md-toolbar>
+  <div flex>
+      <md-list>
+        <md-item ng-repeat="item in menuItems | filter:{ subHeaderTitle : null}" ng-click="openLink(item.link)">
+            <md-item-content md-ink-ripple layout="row" layout-align="start center">
+              <div class="inset md-body-1">
+                <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+              </div>
+              <div class="inset md-body-1">{{item.title}}
+              </div>
+            </md-item-content>
+        </md-item>
+        <div ng-repeat="header in subHeaders">
+          <md-divider></md-divider>
+          <md-subheader>{{header.title}}</md-subheader>
+          <md-item ng-repeat="item in getSubMenuItems(header)" ng-click="openLink(item.link)">
+              <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                <div class="inset">
+                  <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                </div>
+                <div class="inset md-body-1">{{item.title}}
+                </div>
+              </md-item-content>
+          </md-item>
+          
+        </div>
+      </md-list>
+    </div>
+</md-sidenav>

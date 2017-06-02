@@ -1,0 +1,31 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+      <ng-md-icon icon="menu"></ng-md-icon>
+    </md-button>
+    <h3>
+      Cases & Sprint Milestones
+    </h3>
+
+    <span flex></span>
+
+    <md-card flex style="margin:0px;max-height: 56px" aria-label="Search" ng-show="showSearch">
+      <md-input-container style="margin:15px;">
+          <label>Search All Cases</label>
+          <input type="text" ng-model="filterText">
+      </md-input-container>
+    </md-card>
+
+    <ng-md-icon icon="search" ng-click="showSearch = !showSearch" ng-hide="showSearch"></ng-md-icon>
+    <ng-md-icon icon="close" ng-click="showSearch = !showSearch" ng-show="showSearch"></ng-md-icon>
+    
+     <md-button class="md-fab md-mini" aria-label="Add" ng-click="showAdd($event)">
+      <ng-md-icon icon="add"></ng-md-icon>
+    </md-button>
+            
+    <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+      <label>All Accounts</label>
+    </md-button>
+
+  </div>
+</md-toolbar>

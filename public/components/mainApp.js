@@ -1,31 +1,104 @@
-var app = angular.module('CMC-Ext', ['md.data.table', 'ngMaterial', 'mdDataTable', 'ngMdIcons', 'ngRoute']);
+var app = angular.module('CMC-Ext', ['md.data.table', 'ngMaterial', 'mdDataTable', 'ngMdIcons', 'ngRoute', 'ui.router', 'ngStorage']);
 
 
-  app.constant('api_url', 'https://api-ghsc.herokuapp.com/')
-  .config(['$routeProvider', function ($routeProvider) {
+app.constant('api_url', 'https://api-ghsc.herokuapp.com/')
+.config(function($stateProvider, $urlRouterProvider){
+  $stateProvider
+    .state("CEM-Dashboard", {
+      url: "/CEM-Dashboard",
+      views: {
+        'body': {
+          templateUrl: '../components/htmlTemplates/MainPages/CEM-Dashboard.html',
+          controller: 'CEM-Dashboard-Ctrl'
+        },
+        'topToolbar': {
+          templateUrl: '../components/htmlTemplates/htmlParts/topToolbar.html',
+          controller: 'topToolbar-Ctrl'
+        },
+        'sidenav': {
+          templateUrl: '../components/htmlTemplates/htmlParts/sidenav.html',
+          controller: 'SideNavCtrl'
+        }
+      },
+      authenticate: true
+    })
+    .state("CloudMgmt-Assignments", {
+      url: "/CloudMgmt-Assignments",
+      views: {
+        'body': {
+          templateUrl: '/htmlTemplates/MainPages/CloudMgmtAssignments.html',
+          controller: 'AssignmentView-Ctrl'
+        }
+      },
+      authenticate: false
+    })
+    .state("login", {
+      url: "/login",
+      views: {
+        'body': {
+          templateUrl: "../Components/NoAuthRequired/Login/Login.html",
+          controller: 'Login-Ctrl',
+          params: { loginType: 'LoginPage' }
+        }
+      },
+      authenticate: false
+    })
+    .state("OauthLogin", {
+      url: "/OauthLogin",
+      views: {
+        'body': {
+          controller: 'Login-Ctrl'
+        }
+      },
+      authenticate: false
+    })
+    .state("OauthToken", {
+      url: "/OauthToken",
+      views: {
+        'body': {
+          controller: 'Login-Ctrl'
+        }
+      },
+      authenticate: false
+    })
+    .state("ResetLogin", {
+      url: "/ResetLogin",
+      views: {
+        'body': {
+          controller: 'Login-Ctrl'
+        }
+      },
+      authenticate: false
+    })
+    .state("ClearUser", {
+      url: "/ClearUser",
+      views: {
+        'body': {
+          controller: 'Login-Ctrl'
+        }
+      },
+      authenticate: false
+    });
     
+  // Send to login if the URL was not found
+  $urlRouterProvider.otherwise("/login");
+});
 
-    $routeProvider
-      .when('/welcome', {
-        templateUrl: 'htmlTemplates/WelcomeModal.html',
-        controller: 'Login_Controller'
-        
-      })
-      .when('/search', {
-        templateUrl: 'htmlTemplates/mainPages/RecipeSearch.html',
-        controller: 'SearchCtrl'
-      })
-      .when('/CasesMilestones', {
-        templateUrl: '../components/htmlTemplates/MainPages/CasesMilestones.html',
-        controller: 'CasesMilestones-Ctrl'
-      })
-      .when('/CloudMgmt-Assignments', {
-        templateUrl: '../components/htmlTemplates/MainPages/CloudMgmtAssignments.html',
-        controller: 'AssignmentView-Ctrl'
-      });
-      
-  }]);
-
+angular.module('CMC-Ext')
+  .run(function ($rootScope, $state, $stateParams, $authService) {
+    
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+    
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+      console.log('stateChangedStart');
+      if (toState.authenticate && !$authService.isAuthenticated()){
+        // User isn’t authenticated
+        $state.transitionTo("login");
+        event.preventDefault(); 
+      }
+    });
+  });
 
 
 app.directive('userAvatar', function() {
@@ -42,3 +115,12 @@ angular.module('gridListDemo1', ['ngMaterial'])
 .controller('AppCtrl', function($scope) {});
 
 
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}

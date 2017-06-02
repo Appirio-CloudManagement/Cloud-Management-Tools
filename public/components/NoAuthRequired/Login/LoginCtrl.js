@@ -1,7 +1,10 @@
 angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $stateParams, $localStorage){
 
+
 	$scope.getUserDetails = function(conn, UserId)
 	{
+
+
 		console.log(conn);
 		conn.query("SELECT ID, FirstName, LastName, SmallPhotoUrl, FullPhotoUrl, ContactId, Email, Phone From User where Id = '" +UserId+ "'")
 		.then(function(res) {
@@ -20,7 +23,6 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 			$localStorage.ViewAsUser.ContactId = ret.records[0].Id;
 			//window.close();
 			window.location.href = "#/CEM-Dashboard"
-			// ...
 		}, function(err) {
 			console.log('err Value');
 			console.log(err);

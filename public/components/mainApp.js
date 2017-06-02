@@ -1,7 +1,13 @@
 var app = angular.module('CMC-Ext', ['md.data.table', 'ngMaterial', 'mdDataTable', 'ngMdIcons', 'ngRoute', 'ui.router', 'ngStorage']);
 
 
-app.constant('api_url', 'https://api-ghsc.herokuapp.com/')
+//app.constant('SFDC-RedirectURL', 'http://localhost:5000/');
+app.constant('Ouath-RedirectURL', (function() {
+    if(window.location.href.indexOf('localhost') != -1)
+      return 'https://cloudmgmt-agilesupport.herokuapp.com';
+    return 'http://localhost:5000/';
+})())
+
 .config(function($stateProvider, $urlRouterProvider){
   $stateProvider
     .state("CEM-Dashboard", {
@@ -36,7 +42,7 @@ app.constant('api_url', 'https://api-ghsc.herokuapp.com/')
       url: "/login",
       views: {
         'body': {
-          templateUrl: "../Components/NoAuthRequired/Login/Login.html",
+          templateUrl: "../components/NoAuthRequired/Login/Login.html",
           controller: 'Login-Ctrl',
           params: { loginType: 'LoginPage' }
         }

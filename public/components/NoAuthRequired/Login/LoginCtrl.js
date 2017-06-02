@@ -65,9 +65,9 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 			jsforce.browser.init({
 			  clientId: '3MVG9i1HRpGLXp.reEq0HmhlJzGTzYRIwa8bY19Z_.j_cRU2swpBdmA.W3ypOJjx.MwbjmMoDGILzmM0TlHG6',
 			  clientSecret: '2130532915870108718',
-			  redirectUri: 'http://localhost:5000/',
+			  redirectUri: OuathRedirectURL,
 			  instanceUrl: 'https://appirio.my.salesforce.com/', 
-			  proxyUrl: 'http://localhost:5000/proxy/'
+			  proxyUrl: OuathRedirectURL+'proxy/'
 			});
 
 			jsforce.browser.login();
@@ -95,12 +95,12 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 											oauth2 : {
 											    clientId: '3MVG9i1HRpGLXp.reEq0HmhlJzGTzYRIwa8bY19Z_.j_cRU2swpBdmA.W3ypOJjx.MwbjmMoDGILzmM0TlHG6',
 												clientSecret: '2130532915870108718',
-		  										redirectUri: 'http://localhost:5000/'
+		  										redirectUri: OuathRedirectURL
 											},
 											accessToken: oauthAccessToken, 
 											refreshToken: oauthRefreshToken,
 											instanceUrl: 'https://appirio.my.salesforce.com/', 
-											proxyUrl: 'http://localhost:5000/proxy/'
+											proxyUrl: OuathRedirectURL+'/proxy/'
 										  });
 
 

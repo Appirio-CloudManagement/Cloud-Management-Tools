@@ -3,7 +3,7 @@ var app = angular.module('CMC-Ext', ['md.data.table', 'ngMaterial', 'mdDataTable
 
 //app.constant('SFDC-RedirectURL', 'http://localhost:5000/');
 app.constant('Ouath-RedirectURL', (function() {
-    if(window.location.href.indexOf('localhost') != -1)
+    if(window.location.href.indexOf('localhost') == -1)
       return 'https://cloudmgmt-agilesupport.herokuapp.com';
     return 'http://localhost:5000/';
 })())

@@ -1,7 +1,7 @@
 
 var app = angular.module('CMC-Ext');
 
-app.service('$authService', ['$http', '$localStorage', function($http, $localStorage, OuathRedirectURL) {
+app.service('$authService', ['$http', '$localStorage', 'OuathRedirectURL', function($http, $localStorage, OuathRedirectURL) {
 
   var self = this;
 

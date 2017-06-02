@@ -101,7 +101,7 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 											accessToken: oauthAccessToken, 
 											refreshToken: oauthRefreshToken,
 											instanceUrl: 'https://appirio.my.salesforce.com/', 
-											proxyUrl: OuathRedirectURL+'/proxy/'
+											proxyUrl: OuathRedirectURL+'proxy/'
 										  });
 
 

@@ -81,9 +81,14 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 	{
 		var url = window.location.href;
 		console.log('Execute OauthToken');
-		var oauthAccessToken = url.substring(url.indexOf('access_token=')+'access_token='.length, url.indexOf('&refresh_token='));
-		console.log('access_token='+oauthAccessToken);
 		var oauthRefreshToken = getParameterByName('refresh_token');
+		var oauthAccessToken = null;
+		if( oauthRefreshToken != null )
+			oauthAccessToken = url.substring(url.indexOf('access_token=')+'access_token='.length, url.indexOf('&refresh_token='));
+		else
+			oauthAccessToken = url.substring(url.indexOf('access_token=')+'access_token='.length, url.indexOf('&instance_url'));
+		
+		console.log('access_token='+oauthAccessToken);
 		console.log('refresh_token='+oauthRefreshToken);
 
 

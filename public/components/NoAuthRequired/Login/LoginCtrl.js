@@ -1,5 +1,7 @@
-angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $stateParams, $localStorage){
+angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $stateParams, $localStorage,OuathRedirectURL){
 
+	console.log('Ouath-RedirectURL');
+	console.log(OuathRedirectURL);
 
 	$scope.getUserDetails = function(conn, UserId)
 	{

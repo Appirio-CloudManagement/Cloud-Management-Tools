@@ -46,3 +46,7 @@ table {
 
 md-card-title.NoTopPad{padding-top: 0px;}
 md-card-title.NoBottomPad{padding-bottom: 0px;}
+
+.column {
+  padding-left: 20px;
+}

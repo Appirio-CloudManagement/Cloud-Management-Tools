@@ -73,6 +73,8 @@ app.controller('CEM-Dashboard-Ctrl', ['$scope', '$mdBottomSheet','$mdSidenav', '
         }
       }
     }
+    
+    $scope.$apply();
 
   }
 

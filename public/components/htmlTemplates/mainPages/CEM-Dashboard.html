@@ -62,20 +62,18 @@
 
         <mdt-table  style="background: #FFFFFF;"
                     mdt-row="{
-                            data: waitingCustomerAction,
+                            data: WaitingCustomerAction,
                             'column-keys': [
-                                'gmail',
-                                'contact',
-                                'case_number',
-                                'priority',
-                                'status',
-                                'subject',
-                                'owner',
-                                'opened'
+                                'Contact.Name',
+                                'CaseNumber',
+                                'Priority',
+                                'Status',
+                                'Subject',
+                                'Owner.Name',
+                                'Status_Notes_Next_Steps__c'
                             ]
                             }">
           <mdt-header-row>
-            <mdt-column align-rule="left">Gmail</mdt-column>
             <mdt-column align-rule="left"
                         column-sort="true">Contact</mdt-column>
             <mdt-column align-rule="left"
@@ -89,7 +87,7 @@
             <mdt-column align-rule="left"
                         column-sort="true">Owner</mdt-column>
             <mdt-column align-rule="left"
-                        column-sort="true">Opened</mdt-column>
+                        column-sort="true">Status Notes</mdt-column>
           </mdt-header-row>
         </mdt-table>
       </div>
@@ -102,20 +100,19 @@
 
         <mdt-table  style="background: #FFFFFF;"
                     mdt-row="{
-                            data: waitingApirioAction,
+                            data: WaitingAppirioAction,
                             'column-keys': [
-                                'gmail',
-                                'contact',
-                                'case_number',
-                                'priority',
-                                'status',
-                                'subject',
-                                'owner',
-                                'opened'
+                                'Contact.Name',
+                                'CaseNumber',
+                                'Priority',
+                                'Status',
+                                'Subject',
+                                'Owner.Name',
+                                'Status_Notes_Next_Steps__c'
                             ]
                             }">
           <mdt-header-row>
-            <mdt-column align-rule="left">Gmail</mdt-column>
+            <!--<mdt-column align-rule="left">Gmail</mdt-column>-->
             <mdt-column align-rule="left"
                         column-sort="true">Contact</mdt-column>
             <mdt-column align-rule="left"
@@ -129,7 +126,7 @@
             <mdt-column align-rule="left"
                         column-sort="true">Owner</mdt-column>
             <mdt-column align-rule="left"
-                        column-sort="true">Opened</mdt-column>
+                        column-sort="true">Status Notes</mdt-column>
           </mdt-header-row>
         </mdt-table>
       </div>

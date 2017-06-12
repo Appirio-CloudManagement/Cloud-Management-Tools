@@ -74,7 +74,7 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 			jsforce.browser.login();
 		}
 		
-		$scope.UserDetails(conn);
+		$scope.getUserDetails(conn);
 			
 	}
 	else if( $state.current.name == 'OauthToken')

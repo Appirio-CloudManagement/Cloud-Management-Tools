@@ -1,6 +1,36 @@
 var app = angular.module('CMC-Ext', ['md.data.table', 'ngMaterial', 'mdDataTable', 'ngMdIcons', 'ngRoute', 'ui.router', 'ngStorage']);
 
 
+app.factory('AccountsInView', function(){
+  this.Accounts = [];
+
+  //self.GetAccounts = function(){
+  //  return self.Accounts;
+  //}
+
+  this.AddAccount = function(account){
+    console.log('addAccount - AccountsInView factory');
+    console.log(account); 
+    if( account.Name != undefined && account.Name != null && account.Id != undefined && account.Id != null &&  self.ContainsAccount(account) == false)
+      self.Accounts.push(account);
+    else{
+      console.log('this account was not added to AccountsInView');
+      console.log(account);
+    }
+
+  }
+
+  this.ContainsAccount = function(account){
+    for(var i = 0; i < self.Accounts.length; i++)
+      if( account.Id.substring(0, 15) == self.Accounts[i].Id.substring(0, 15) )
+        return true;
+    
+    return false;
+  }
+
+  return this.Accounts;
+});
+
 //app.constant('SFDC-RedirectURL', 'http://localhost:5000/');
 app.constant('OuathRedirectURL', (function() {
     if(window.location.href.indexOf('localhost') == -1)

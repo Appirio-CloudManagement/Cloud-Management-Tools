@@ -1,8 +1,12 @@
 
-app.controller('CEM-Dashboard-Ctrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$mdToast', '$localStorage', '$authService', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $mdToast, $localStorage, $authService){
+app.controller('CEM-Dashboard-Ctrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$mdToast', '$localStorage', '$authService', '$InView', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $mdToast, $localStorage, $authService, $InView){
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();
   };
+
+    $scope.Cases = [];
+    $scope.WaitingCustomerAction = [];
+    $scope.WaitingAppirioAction = [];
     $scope.UserId = $authService.ViewAsUser.Id;
     $scope.UserContactId = $authService.ViewAsUser.ContactId;
     $scope.conn = $authService.conn;
@@ -20,75 +24,6 @@ app.controller('CEM-Dashboard-Ctrl', ['$scope', '$mdBottomSheet','$mdSidenav', '
 
     $scope.UserId = $authService.ViewAsUser.Id;
     $scope.conn = $authService.conn;
-
-
-        $scope.waitingCustomerAction = [
-            {
-                gmail: '<a href="https://www.google.com/">Search</a>',
-                contact: 'Guy Curry',
-                case_number: 159000,
-                priority: 1,
-                status: 'Appirio Work in Progress',
-                subject: 'Test Subject - validation test longer',
-                owner: 'Guy Curry',
-                opened: '1/2/2017'
-            },
-            {
-                gmail: '<a href="https://www.google.com/">Search</a>',
-                contact: 'Guy Curry',
-                case_number: 159000,
-                priority: 2,
-                status: 'Appirio Work in Progress',
-                subject: 'Test Subject - validation test longer',
-                owner: 'Guy Curry',
-                opened: '1/5/2017'
-            },
-            {
-                gmail: '<a href="https://www.google.com/">Search</a>',
-                contact: 'Guy Curry',
-                case_number: 159000,
-                priority: 1,
-                status: 'Appirio Work in Progress',
-                subject: 'Test Subject - validation test longer',
-                owner: 'Guy Curry',
-                opened: '1/1/2017'
-            },
-            {
-                gmail: '<a href="https://www.google.com/">Search</a>',
-                contact: 'Guy Curry',
-                case_number: 159000,
-                priority: 3,
-                status: 'Appirio Work in Progress',
-                subject: 'Test Subject - validation test longer',
-                owner: 'Guy Curry',
-                opened: '1/3/2017'
-            }
-            
-        ];
-
-        $scope.waitingApirioAction = [
-            {
-                gmail: '<a href="https://www.google.com/">Search</a>',
-                contact: 'Guy Curry',
-                case_number: 159000,
-                priority: 2,
-                status: 'Appirio Work in Progress',
-                subject: 'Test Subject - validation test longer',
-                owner: 'Guy Curry',
-                opened: '1/2/2017'
-            },
-            {
-                gmail: '<a href="https://www.google.com/">Search</a>',
-                contact: 'Guy Curry',
-                case_number: 159000,
-                priority: 3,
-                status: 'Appirio Work in Progress',
-                subject: 'Test Subject - validation test longer',
-                owner: 'Guy Curry',
-                opened: '1/1/2017'
-            }
-            
-        ];
 
 
   $scope.showListBottomSheet = function($event) {
@@ -115,11 +50,37 @@ app.controller('CEM-Dashboard-Ctrl', ['$scope', '$mdBottomSheet','$mdSidenav', '
     });
   };
 
+  $scope.processCases = function(accountsWithCases){
+
+    for(var i = 0; i < accountsWithCases.records.length; i++)
+    {
+      var account = accountsWithCases.records[i];
+      $InView.AddAccount(account);
+
+      if( account.Cases != null && account.Cases.records != null ){
+        for( var x = 0; x < account.Cases.records.length; x++){
+          var Case = account.Cases.records[x];
+          $scope.Cases.push(Case);
+
+          if( Case.Status == "Fixed - Pending Release" || Case.Status == "Appirio Work in Progress" || Case.Status == "Escalated" || Case.Status == "New") {
+            Case.WaitingOnAppirio = true;
+            $scope.WaitingAppirioAction.push(Case);
+          }
+          else{
+            Case.WaitingOnAppirio = false;
+            $scope.WaitingCustomerAction.push(Case);
+          }
+        }
+      }
+    }
+
+  }
+
 
   $scope.conn.query($scope.AccountQuery).then(function(res){
-    console.log('ACCOUNT QUERY WORKED!!!');
-    console.log($scope.AccountQuery);
-    console.log(res);
+    
+    $scope.processCases(res);
+
   });
 
 

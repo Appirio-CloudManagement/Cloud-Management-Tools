@@ -37,13 +37,13 @@ app.controller('SideNavCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$window', '
             {
               subHeaderTitle :'Your Environments',
               title : 'Production (1)',
-              link : 'Search Recipes',
+              link : 'EV1',
               icon : 'cloud_queue'
             },
             {
               subHeaderTitle :'Your Environments',
               title : 'UAT / Stage',
-              link : 'Search Recipes',
+              link : 'EV2',
               icon : 'cloud_queue'
             },
             {
@@ -55,7 +55,7 @@ app.controller('SideNavCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$window', '
             {
               subHeaderTitle :'Management',
               title : 'My Settings',
-              link : 'Search Recipes',
+              link : 'Management',
               icon : 'settings'
             }
 

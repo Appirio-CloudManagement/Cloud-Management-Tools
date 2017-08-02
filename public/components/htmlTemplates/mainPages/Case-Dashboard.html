@@ -1,0 +1,29 @@
+<div layout="row" >
+  <div class="slds-p-around_small" layout="column" style="min-width:200px; width=20%">
+    <div class="slds-box">
+      <nav class="slds-nav-vertical">
+        <ul class="slds-nav-vertical__section">
+          <div class="slds-nav-vertical__title slds-text-heading_large">Cases</div>
+          <div ng-if="load == false" class="slds-text-body_regular slds-text-color_weak">Loading...</div>
+          <div ng-repeat="item in cases">
+            <li class="slds-nav-vertical__item slds-nav-vertical__action" ng-click="updateView(item)" ng-class="showing.Id === item.Id && 'slds-is-active'">
+              C-{{item.CaseNumber}}
+            </li>
+          </div>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div ng-if="load" class="slds-p-around_small" layout="column" style="width:100%; max-height:100%">
+    <div class="slds-box" style="width: 100%; height:100%">
+      <div class="slds-text-heading_medium">
+        <b>C-{{showing.CaseNumber}}</b> - {{showing.Subject}}
+      </div>
+      <form>
+
+        <textarea class="slds-textarea">{{showing.Description}}</textarea>
+        <text
+      </form>
+    </div>
+  </div>
+</div>

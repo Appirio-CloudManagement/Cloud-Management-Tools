@@ -28,6 +28,25 @@ app.constant('OuathRedirectURL', (function() {
       },
       authenticate: true
     })
+    .state("Case-Dashboard", {
+      title: 'Cases',
+      url: "/Case-Dashboard",
+      views: {
+        'body': {
+          templateUrl: '../components/htmlTemplates/mainPages/Case-Dashboard.html',
+          controller: 'Case-Dashboard-Ctrl'
+        },
+        'topToolbar': {
+          templateUrl: '../components/htmlTemplates/htmlParts/topToolbar.html',
+          controller: 'topToolbar-Ctrl'
+        },
+        'sidenav': {
+          templateUrl: '../components/htmlTemplates/htmlParts/sidenav.html',
+          controller: 'SideNavCtrl'
+        }
+      },
+      authenticate: true
+    })
     .state("CloudMgmt-Assignments", {
       url: "/CloudMgmt-Assignments",
       views: {

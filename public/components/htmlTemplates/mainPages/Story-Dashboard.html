@@ -1,0 +1,10 @@
+<div flex>
+  <md-list>
+    <md-item ng-repeat="item in Stories">
+      <md-item-content>
+        <div style="float:left">{{item.Name}}</div>
+        <div style="float:left">{{item.Story_Name__c}}</div>
+        <div style="float:right">NEXT TASK DUE: {{}}</div>
+      </md-item-content>
+  </md-list>
+</div>

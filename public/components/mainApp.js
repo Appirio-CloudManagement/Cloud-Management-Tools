@@ -28,6 +28,25 @@ app.constant('OuathRedirectURL', (function() {
       },
       authenticate: true
     })
+    .state("Story-Dashboard", {
+      title: 'Stories',
+      url: "/Story-Dashboard",
+      views: {
+        'body': {
+          templateUrl: '../components/htmlTemplates/mainPages/Story-Dashboard.html',
+          controller: 'Story-Dashboard-Ctrl'
+        },
+        'topToolbar': {
+          templateUrl: '../components/htmlTemplates/htmlParts/topToolbar.html',
+          controller: 'topToolbar-Ctrl'
+        },
+        'sidenav': {
+          templateUrl: '../components/htmlTemplates/htmlParts/sidenav.html',
+          controller: 'SideNavCtrl'
+        }
+      },
+      authenticate: true
+    })
     .state("Case-Dashboard", {
       title: 'Cases',
       url: "/Case-Dashboard",

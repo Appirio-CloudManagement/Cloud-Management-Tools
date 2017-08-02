@@ -35,6 +35,12 @@ app.controller('SideNavCtrl', ['$scope', '$mdSidenav', '$mdDialog', '$window', '
               icon : 'book'
             },
             {
+               subHeaderTitle : null,
+               title : 'Stories',
+               link : '#/Story-Dashboard',
+               icon : 'list'
+            },
+            {
               subHeaderTitle : null,
               title : 'Cases',
               link : '#/Case-Dashboard',

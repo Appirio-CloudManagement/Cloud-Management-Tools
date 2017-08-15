@@ -11,6 +11,7 @@ app.constant('OuathRedirectURL', (function() {
 .config(function($stateProvider, $urlRouterProvider){
   $stateProvider
     .state("CEM-Dashboard", {
+      title: 'Cases and Sprint Milestones',
       url: "/CEM-Dashboard",
       views: {
         'body': {
@@ -67,6 +68,7 @@ app.constant('OuathRedirectURL', (function() {
       authenticate: true
     })
     .state("CloudMgmt-Assignments", {
+      title: 'Cloud Management Assignments',
       url: "/CloudMgmt-Assignments",
       views: {
         'body': {

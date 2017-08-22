@@ -11,7 +11,7 @@ app.controller('Case-Dashboard-Ctrl', ['$scope', '$mdSidenav', '$authService', '
   $scope.showing = '';
 
 
-  var case_soql =  "SELECT Id, CaseNumber, Subject, Description, Status, Steps_to_Reproduce__c, Status_Notes_Next_Steps__c, Actual_LOE__c, Estimated_LOE__c, Bug__c, Product1__c FROM Case WHERE Status != 'Closed' AND Product1__c = 'Cloud Management Support' LIMIT 15";
+  var case_soql =  "SELECT Id, CaseNumber, Subject, Description, Status, Steps_to_Reproduce__c, Status_Notes_Next_Steps__c, Actual_LOE__c, Estimated_LOE__c, Bug__c, Product1__c FROM Case WHERE Status != 'Closed' AND Product1__c = 'Cloud Management Support' AND OwnerId = '" + $scope.UserId + "' LIMIT 15";
   $scope.conn.query(case_soql).then(function(res) {
     $scope.cases = res.records;
     $scope.load = true;

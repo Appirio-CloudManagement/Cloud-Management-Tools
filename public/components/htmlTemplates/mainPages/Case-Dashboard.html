@@ -15,14 +15,45 @@
     </div>
   </div>
   <div ng-if="load" class="slds-p-around_small" layout="column" style="width:100%; max-height:100%">
-    <div class="slds-box" style="width: 100%; height:100%">
-      <div class="slds-text-heading_medium">
-        <b>C-{{showing.CaseNumber}}</b> - {{showing.Subject}}
-      </div>
-      <form>
+    <div class="slds-box" style="width: 100%;">
+        <div class="slds-text-heading_medium" style="display: inline">
+          <b>C-{{showing.CaseNumber}}</b>
+          <p style="display: inline; overflow:hidden; white-space: nowrap;">{{showing.Subject}}</p>
+          <button class="slds-button slds-button_brand" style="float: right">Save</button>
+        </div>
+      <form class="slds-form slds-form_compound slds-p-top_medium">
+        <div class="slds-form-element">
+          <label class="slds-form-element__label">Description:</label>
+          <div class="slds-form-element__control">
+            <textarea class="slds-textarea" rows="6">{{showing.Description}}</textarea>
+          </div>
+        </div>
+        <div class="slds-form-element__row slds-p-top_small">
+          <div class="slds-form-element slds-size_1-of-2 slds-p-right_small">
+            <label class="slds-form-element__label">Steps to Reproduce:</label>
+            <div class="slds-form-element__control">
+              <textarea class="slds-textarea" rows="7">{{showing.Steps_to_Reproduce__c}}</textarea>
+            </div>
+          </div>
+          <div class="slds-form-element slds-size_1-of-2">
+            <label class="slds-form-element__label">Status:</label>
+            <div class="slds-form-element__control">
+              <div class="slds-select_container">
+                <select class="slds-select">
+                  <option>Insert Possible Options</option>
+                </select>
+              </div>
+            </div>
+            <div class="slds-p-top_x-small"></div>
+            <label class="slds-form-element__label">Status Notes:</label>
+            <div class="slds-form-element__control">
+              <textarea class="slds-textarea" rows="4">{{showing.Status_Notes_Next_Steps__c}}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="slds-form-element__row">
 
-        <textarea class="slds-textarea">{{showing.Description}}</textarea>
-        <text
+        </div>
       </form>
     </div>
   </div>

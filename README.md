@@ -1,17 +1,17 @@
-# node-js-getting-started
+# Getting Started with Cloud Management Dashboard
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
 
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+Built for [Heroku Buildpack for Node.js](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-nodejs) Check out the [Getting Started on Heroku Node JS](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
+Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed. 
 
 ```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
+$ git clone https://github.com/Appirio-CloudManagement/Cloud-Management-Tools.git # or clone your 
+$ cd Cloud-Management-Tools
+$ npm install jsforce-ajax-proxy --save
 $ npm start
 ```
 

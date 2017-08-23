@@ -4,6 +4,22 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 	console.log(OuathRedirectURL);
 	$scope.OuathRedirectURL = OuathRedirectURL;
 
+
+	$scope.buildConnection = function(oauthAccessToken, oauthRefreshToken)
+	{
+		return new jsforce.Connection({ 
+											oauth2 : {
+											    clientId: '3MVG9i1HRpGLXp.reEq0HmhlJzGTzYRIwa8bY19Z_.j_cRU2swpBdmA.W3ypOJjx.MwbjmMoDGILzmM0TlHG6',
+												clientSecret: '2130532915870108718',
+		  										redirectUri: OuathRedirectURL
+											},
+											accessToken: oauthAccessToken, 
+											refreshToken: oauthRefreshToken,
+											instanceUrl: 'https://appirio.my.salesforce.com/', 
+											proxyUrl: OuathRedirectURL+'proxy/'
+										  });
+	}
+
 	$scope.getUserDetails = function(conn, UserId)
 	{
 
@@ -54,6 +70,7 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 	{
 		$localStorage.User = null;
 		$localStorage.UserAuth = null;
+		$localStorage.UserId = null;
 		window.location.href = "#/OauthLogin";
 	}
 	else if( $state.current.name == 'OauthLogin')
@@ -74,7 +91,9 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 			jsforce.browser.login();
 		}
 		
-		$scope.getUserDetails(conn);
+		console.log('before getUserDetails');
+		var conn = $scope.buildConnection($localStorage.UserAuth.accessToken, $localStorage.UserAuth.refreshToken, $localStorage.UserId)
+		$scope.getUserDetails(conn, $localStorage.UserId);
 			
 	}
 	else if( $state.current.name == 'OauthToken')
@@ -96,34 +115,15 @@ angular.module('CMC-Ext').controller('Login-Ctrl', function($scope, $state, $sta
 									refreshToken : oauthRefreshToken
 								};
 
-	
-		var conn = new jsforce.Connection({ 
-											oauth2 : {
-											    clientId: '3MVG9i1HRpGLXp.reEq0HmhlJzGTzYRIwa8bY19Z_.j_cRU2swpBdmA.W3ypOJjx.MwbjmMoDGILzmM0TlHG6',
-												clientSecret: '2130532915870108718',
-		  										redirectUri: OuathRedirectURL
-											},
-											accessToken: oauthAccessToken, 
-											refreshToken: oauthRefreshToken,
-											instanceUrl: 'https://appirio.my.salesforce.com/', 
-											proxyUrl: OuathRedirectURL+'proxy/'
-										  });
-
+		var conn = $scope.buildConnection(oauthAccessToken, oauthRefreshToken);
 
 		console.log(conn);
-
-		conn.query('select name from account', function(res) {
-			console.log('test accounts query');
-			console.log(res);
-			console.log('test end');
-        });
-		
 		
 		var UserId = getParameterByName('id');
 		console.log(UserId);
 		UserId = UserId.substring(UserId.length-18, UserId.length);
 		console.log(UserId);
-		$localStorage.User = {};
+		$localStorage.UserId = UserId;
 
 		$scope.getUserDetails(conn, UserId);
 		
